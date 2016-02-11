@@ -28,7 +28,7 @@ resource "aws_route_table" "public-rt" {
         }
 
         tags {
-                Name = "Public Ruote Table"
+                Name = "Public Route Table"
         }
 }
 
@@ -70,7 +70,7 @@ resource "aws_route_table" "private-rt" {
         }
 
         tags {
-                Name = "Private Ruote Table"
+                Name = "Private Route Table"
         }
 }
 
