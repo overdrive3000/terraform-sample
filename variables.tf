@@ -1,11 +1,16 @@
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
-variable "aws_key_path" {}
-variable "aws_key_name" {}
+
+variable "ssh_key" {}
+variable "ssh_key_name" {}
 
 variable "aws_region" {
         description = "EC2 Region to use"
         default = "us-east-1"
+}
+
+variable "ecs-instance-type" {
+        default = "t2.micro"
 }
 
 variable "ecs-ami" {

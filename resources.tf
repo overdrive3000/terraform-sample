@@ -24,7 +24,7 @@ resource "aws_security_group" "db_sg" {
 resource "aws_db_subnet_group" "default" {
         name = "private_group"
         description = "DB Group on Private Subnets"
-        subnet_ids = ["${join("," aws_subnet.private.*.id)}"]
+        subnet_ids = ["${join(",", aws_subnet.private.*.id)}"]
         tags {
                 Name = "DB Security Group"
         }
@@ -35,6 +35,7 @@ resource "aws_db_instance" "wordpress-db" {
         allocated_storage = 10
         engine = "mysql"
         engine_version = "5.6.23"
+        instance_class = "db.t1.micro"
         name = "${database_name}"
         username = "${database_user}"
         password = "${database_password}"

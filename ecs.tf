@@ -28,6 +28,7 @@ resource "aws_security_group" "ecs_sg" {
         ingress {
                 from_port = 80
                 to_port = 80
+                protocol = "tcp"
                 security_groups = ["${aws_security_group.trust_sg.id}"]
         }
 
@@ -112,7 +113,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_alarm" {
                 AutoScalingGroupName = "${aws_autoscaling_group.ecs_asg.name}"
         }
         alarm_description = "CPU Usage Alarm"
-        alarm_action = ["${aws_autoscaling_policy.asg_policy.arn}"]
+        alarm_actions = ["${aws_autoscaling_policy.asg_policy.arn}"]
 }
 
 resource "aws_autoscaling_group" "ecs_asg" {
@@ -127,10 +128,10 @@ resource "aws_autoscaling_group" "ecs_asg" {
 }
 
 resource "template_file" "wordpress-json" {
-        filename = "files/wordpress-task.json"
+        template = "${file("files/wordpress-task.json")}"
 
         vars {
-                database_endpoint = "${aws_rds_instance.wordpress-db.address}"
+                database_endpoint = "${aws_db_instance.wordpress-db.address}"
                 database_name = "${var.database_name}"
                 database_user = "${var.database_user}"
                 database_password = "${var.database_password}"
@@ -144,7 +145,7 @@ resource "aws_ecs_task_definition" "wordpress-task" {
 
 resource "aws_iam_role_policy" "ecs_service_role_policy" {
         name = "ecs_service_role_policy"
-        policy = "${file("filess/ecs-service-role-policy.json")}"
+        policy = "${file("files/ecs-service-role-policy.json")}"
         role = "${aws_iam_role.ecs_role.id}"
 }
 
