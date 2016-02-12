@@ -28,6 +28,7 @@ resource "aws_db_subnet_group" "default" {
         tags {
                 Name = "DB Security Group"
         }
+        depends_on = ["${join(",", aws_subnet.private.*.id)}"]
 }
 
 resource "aws_db_instance" "wordpress-db" {
