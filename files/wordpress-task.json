@@ -1,0 +1,60 @@
+{
+  "requiresAttributes": [],
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:733136821265:task-definition/wordpress-app-task:1",
+  "status": "ACTIVE",
+  "revision": 1,
+  "containerDefinitions": [
+    {
+      "volumesFrom": [],
+      "memory": 300,
+      "extraHosts": null,
+      "dnsServers": null,
+      "disableNetworking": null,
+      "dnsSearchDomains": null,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "hostname": null,
+      "essential": true,
+      "entryPoint": [],
+      "mountPoints": [],
+      "name": "wordpress-app",
+      "ulimits": null,
+      "dockerSecurityOptions": null,
+      "environment": [
+        {
+          "name": "WORDPRESS_DB_USER",
+          "value": "${database_user}"
+        },
+        {
+          "name": "WORDPRESS_DB_PASSWORD",
+          "value": "${database_password}"
+        },
+        {
+          "name": "WORDPRESS_DB_HOST",
+          "value": "${database_endpoint}"
+        },
+        {
+          "name": "WORDPRESS_DB_NAME",
+          "value": "${database_name}"
+        }
+      ],
+      "links": [],
+      "workingDirectory": null,
+      "readonlyRootFilesystem": null,
+      "image": "wordpress:latest",
+      "command": [],
+      "user": null,
+      "dockerLabels": null,
+      "logConfiguration": null,
+      "cpu": 10,
+      "privileged": null
+    }
+  ],
+  "volumes": [],
+  "family": "wordpress-app-task"
+}
