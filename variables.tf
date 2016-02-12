@@ -9,17 +9,15 @@ variable "aws_region" {
 }
 
 variable "ecs-ami" {
-        type = "map"
-
         default = {
-                us-east-1 = "ami-cb2305a1"
-                us-west-1 = "ami-bdafdbdd"
-                us-west-2 = "ami-ec75908c"
-                eu-west-1 = "ami-13f84d60"
-                eu-central-1 = "ami-c3253caf"
-                ap-northeast-1 = "ami-e9724c87"
-                ap-southeast-1 = "ami-5f31fd3c"
-                ap-southeast-2 = "ami-83af8ae0"
+                "us-east-1" = "ami-cb2305a1"
+                "us-west-1" = "ami-bdafdbdd"
+                "us-west-2" = "ami-ec75908c"
+                "eu-west-1" = "ami-13f84d60"
+                "eu-central-1" = "ami-c3253caf"
+                "ap-northeast-1" = "ami-e9724c87"
+                "ap-southeast-1" = "ami-5f31fd3c"
+                "ap-southeast-2" = "ami-83af8ae0"
         }
 }
 
@@ -54,3 +52,13 @@ variable "private_subnet_cidr" {
                 "1" = "10.130.3.0/24"
         }
 }
+
+variable "database_name" {
+        default = "wordpressdb"
+}
+
+variable "database_user" {
+        default = "wordpress"
+}
+
+variable "database_password" {}

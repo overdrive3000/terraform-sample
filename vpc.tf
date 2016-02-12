@@ -83,3 +83,9 @@ resource "aws_route_table_association" "private-rt" {
 resource "aws_internet_gateway" "igw" {
         vpc_id = "${aws_vpc.ECSVPC.id}"
 }
+
+resource "aws_security_group" "trust_sg" {
+        name = "trust_sg"
+        description = "Trsuted Hosts"
+        vpc_id = "${aws_vpc.ECSVPC.id}"
+}
