@@ -147,6 +147,12 @@ resource "aws_iam_role_policy" "ecs_service_role_policy" {
         role = "${aws_iam_role.ecs_role.id}"
 }
 
+resource "aws_iam_role_policy" "ecs_instance_role_policy" {
+        name = "ecs_instance_role_policy"
+        policy = "${file("files/ecs-instance-role-policy.json")}"
+        role = "${aws_iam_role.ecs_role.id}"
+}
+
 resource "aws_ecs_service" "wordpress-service" {
         name = "wordpress-service"
         cluster = "${aws_ecs_cluster.wordpress-cluster.id}"
