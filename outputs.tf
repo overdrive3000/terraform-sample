@@ -17,5 +17,10 @@ output "nat_public_ip" {
 
 ### RDS Outputs ####
 output "rds_endpoint" {
-        value = "${aws_db_instance.wordpress-db.address}"
+        value = "${aws_db_instance.wordpressdb.address}"
+}
+
+### ECS Outputs ###
+output "ecs_name" {
+        value = "${aws_ecs_cluster.wordpress-cluster.name}"
 }
