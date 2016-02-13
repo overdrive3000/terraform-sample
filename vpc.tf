@@ -89,3 +89,35 @@ resource "aws_security_group" "trust_sg" {
         description = "Trsuted Hosts"
         vpc_id = "${aws_vpc.ECSVPC.id}"
 }
+
+resource "aws_security_group" "bastion_sg" {
+        name = "bastion_sg"
+        description = "Bastion Host Security Group"
+        vpc_id = "${aws_vpc.ECSVPC.id}"
+        
+        ingress {
+                from_port = 22
+                to_port = 22
+                protocol = "tcp"
+                cidr_blocks = ["0.0.0.0/0"]
+        }
+
+        egress {
+                from_port = 0
+                to_port = 0
+                protocol = "-1"
+                cidr_blocks = ["0.0.0.0/0"]
+        }
+}
+
+resource "aws_instance" "bastion_host" {
+        ami = "${lookup(var.ecs-ami, var.aws_region)}"
+        instance_type = "t2.micro"
+        subnet_id = "${aws_subnet.public.0.id}"
+        key_name = "${var.ssh_key_name}"
+        vpc_security_group_ids = ["${aws_security_group.trust_sg.id}", "${aws_security_group.bastion_sg.id}"]
+
+        tags {
+                Name = "Bastion Host"
+        }
+}
