@@ -48,7 +48,7 @@ resource "aws_elb" "elb" {
         security_groups = ["${aws_security_group.trust_sg.id}", "${aws_security_group.elb_sg.id}"]
 
         listener {
-                instance_port = 8080
+                instance_port = 80
                 instance_protocol = "http"
                 lb_port = 80
                 lb_protocol = "http"
@@ -58,7 +58,7 @@ resource "aws_elb" "elb" {
                 healthy_threshold = 2
                 unhealthy_threshold = 10
                 timeout = 5
-                target = "HTTP:8080/"
+                target = "HTTP:80/readme.html"
                 interval = 30
         }
 }
@@ -164,7 +164,7 @@ resource "aws_ecs_service" "wordpress-service" {
         load_balancer {
                 elb_name = "${aws_elb.elb.id}"
                 container_name = "wordpress-app"
-                container_port = 8080
+                container_port = 80
         }
 }
 
