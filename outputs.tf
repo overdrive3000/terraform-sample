@@ -24,3 +24,8 @@ output "rds_endpoint" {
 output "ecs_name" {
         value = "${aws_ecs_cluster.wordpress-cluster.name}"
 }
+
+### ELB DNS ###
+output "dns" {
+  value = "{aws_elb.elb.dns_name}"
+}
